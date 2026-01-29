@@ -1,2 +1,4 @@
-mathjax: true
 theme: jekyll-theme-hacker
+mathjax: true
+title: MOND 3D Physics Engine
+description: Simulating galactic dynamics without Dark Matter.
