@@ -3,77 +3,138 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOND 3D Physics Engine Dashboard</title>
+    <title>MOND 3D Physics Engine | Scientific Dashboard</title>
     
-    <script>
-      window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
-    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0d1117; color: #c9d1d9;
-            margin: 0; padding: 50px;
-            line-height: 1.6; font-size: 22px; /* Large base font */
+        :root { 
+            --bg: #0d1117; --card: #161b22; --text: #c9d1d9; 
+            --blue: #58a6ff; --green: #3fb950; --border: #30363d; 
         }
-        .container { max-width: 1200px; margin: 0 auto; }
-        h1 { font-size: 3.5rem; color: #58a6ff; margin-bottom: 10px; text-align: center; }
-        h2 { font-size: 2.2rem; color: #58a6ff; border-bottom: 1px solid #30363d; margin-top: 50px; }
-        .hero-gif { width: 100%; border-radius: 20px; border: 2px solid #58a6ff; box-shadow: 0 0 30px rgba(88, 166, 255, 0.2); }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 40px 0; }
-        .card { background: #161b22; padding: 25px; border-radius: 15px; border: 1px solid #30363d; text-align: center; }
-        img { width: 100%; border-radius: 10px; margin-top: 15px; }
-        .math-box { background: #090c10; padding: 30px; border-radius: 15px; border-left: 5px solid #58a6ff; margin: 30px 0; font-size: 26px; }
-        pre { background: #000; padding: 20px; border-radius: 10px; color: #39ff14; overflow-x: auto; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg); color: var(--text);
+            margin: 0; padding: 0; line-height: 1.6; font-size: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 60px 20px; }
+        
+        /* Header & Intro */
+        header { text-align: center; margin-bottom: 80px; }
+        h1 { font-size: 4rem; color: var(--blue); margin: 0; }
+        .subtitle { font-size: 1.5rem; opacity: 0.8; margin-top: 10px; }
+
+        /* Sections */
+        h2 { font-size: 2.5rem; color: var(--blue); border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-top: 60px; }
+        
+        /* Layout Grids */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; margin-top: 30px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 25px; transition: transform 0.2s; }
+        .card:hover { border-color: var(--blue); }
+        
+        /* Media Elements */
+        img { width: 100%; border-radius: 8px; margin-top: 15px; border: 1px solid var(--border); }
+        .hero-animation { width: 100%; border-radius: 15px; border: 2px solid var(--blue); box-shadow: 0 0 20px rgba(88, 166, 255, 0.2); }
+
+        /* Physics Blocks */
+        .math-block { background: #090c10; padding: 30px; border-radius: 12px; border-left: 6px solid var(--blue); margin: 30px 0; }
+        .math-text { font-size: 1.8rem; text-align: center; }
+
+        /* File Architecture List */
+        ul.file-list { columns: 2; list-style-type: none; padding: 0; }
+        ul.file-list li { padding: 8px 0; font-family: "SFMono-Regular", Consolas, monospace; font-size: 18px; }
+        ul.file-list li::before { content: "📄 "; }
+
+        code { background: #000; color: var(--green); padding: 20px; display: block; border-radius: 10px; overflow-x: auto; font-size: 18px; }
     </style>
 </head>
 <body>
-    <div class="container">
+
+<div class="container">
+    <header>
         <h1>🌌 MOND 3D Physics Engine</h1>
-        <p style="text-align:center; font-size: 26px; opacity: 0.8;">A Fully Symplectic N-Body Simulator for Milgromian Dynamics</p>
+        <p class="subtitle">A High-Performance N-Body Simulation Suite for Modified Newtonian Dynamics</p>
+    </header>
 
-        <h2>🎬 Galaxy Evolution Animation</h2>
-        <img src="galaxy_evolution.gif" class="hero-gif" alt="Simulation Animation">
+    <h2>🎬 Dynamical Evolution</h2>
+    <p>This 2.0 Gyr simulation captures the emergence of spiral structure and orbital stability using a symplectic leapfrog integrator.</p>
+    <img src="galaxy_evolution.gif" class="hero-animation" alt="Galaxy Evolution GIF">
 
-        <h2>📊 Key Scientific Results</h2>
-        <div class="grid">
-            <div class="card">
-                <strong>MOND vs. Newtonian</strong>
-                <img src="mond_vs_newtonian.png">
-                <p style="font-size: 16px;">Comparison of gravitational drop-off.</p>
-            </div>
-            <div class="card">
-                <strong>Tully-Fisher Relation</strong>
-                <img src="tully_fisher_relation.png">
-                <p style="font-size: 16px;">Empirical $M \propto V^4$ verification.</p>
-            </div>
-        </div>
-
+    <h2>📊 Core Scientific Results</h2>
+    <div class="grid">
         <div class="card">
-            <strong>Full Rotation Curve Analysis</strong>
-            <img src="rotation_curves_analysis.png">
+            <h3>Milgromian vs. Newtonian</h3>
+            <p>Analysis of the acceleration regimes ($g$ vs $g_N$).</p>
+            <img src="mond_vs_newtonian.png" alt="MOND vs Newtonian Comparison">
         </div>
-
-        <h2>➗ The Physics of QUMOND</h2>
-        <div class="math-box">
-            $$\mathbf{g} = \nu\left(\frac{|\mathbf{g}_N|}{a_0}\right) \mathbf{g}_N$$
-            <p style="font-size: 18px; margin-top: 10px;">The field equation relating Newtonian and Milgromian regimes.</p>
+        <div class="card">
+            <h3>Tully-Fisher Relation</h3>
+            <p>Confirming the empirical $M \propto V^4$ scaling observed in nature.</p>
+            <img src="tully_fisher_relation.png" alt="Tully-Fisher Plot">
         </div>
+    </div>
 
-        <div class="math-box">
-            $$\nu(y) = \frac{1}{2} + \sqrt{\frac{1}{4} + \frac{1}{y}}$$
-            <p style="font-size: 18px; margin-top: 10px;">The Simple Interpolation Function used in this engine.</p>
+    <div class="grid">
+        <div class="card">
+            <h3>Rotation Curve Analysis</h3>
+            <p>Verification of flat velocity profiles at large radii ($R > 10$ kpc).</p>
+            <img src="rotation_curves_analysis.png" alt="Rotation Curves">
         </div>
+        <div class="card">
+            <h3>Disk Stability (Snapshots)</h3>
+            <div style="display:flex; gap: 10px;">
+                <img src="snapshot_000.png" style="width:50%" alt="Initial">
+                <img src="snapshot_009.png" style="width:50%" alt="Final">
+            </div>
+            <p style="text-align:center; font-size: 14px;">T = 0 Gyr vs T = 2.0 Gyr</p>
+        </div>
+    </div>
 
-        <h2>🚀 Source Code & Reproducibility</h2>
-        <p>This engine is optimized for <strong>Apple Silicon (M1/M2/M3)</strong> using Clang.</p>
-        <pre><code># To reproduce these results:
+    <h2>➗ Theoretical Framework (LaTeX)</h2>
+    <div class="math-block">
+        <p>The Quasi-Linear MOND (QUMOND) field equation relates the MONDian acceleration $\mathbf{g}$ to the Newtonian acceleration $\mathbf{g}_N$:</p>
+        <div class="math-text">
+            \[\mathbf{g} = \nu\left(\frac{|\mathbf{g}_N|}{a_0}\right) \mathbf{g}_1\]
+        </div>
+    </div>
+
+    <div class="math-block">
+        <p>The engine utilizes the **Simple Interpolation Function** to bridge the high-acceleration (Newtonian) and low-acceleration (Deep-MOND) regimes:</p>
+        <div class="math-text">
+            \[\nu(y) = \frac{1}{2} + \sqrt{\frac{1}{4} + \frac{1}{y}}\]
+        </div>
+        <p>where $y = |\mathbf{g}_N| / a_0$ and $a_0 \approx 1.2 \times 10^{-10} \text{ m/s}^2$.</p>
+    </div>
+
+    <h2>📂 Project Architecture</h2>
+    <p>This engine is comprised of the following modules and data files currently active in the repository:</p>
+    <ul class="file-list">
+        <li>mond_physics_engine.c</li>
+        <li>mond_sim (Executable)</li>
+        <li>visualize_mond.py</li>
+        <li>rotation_curve_final.dat</li>
+        <li>rotation_curve_initial.dat</li>
+        <li>snapshot_000.dat - snapshot_009.dat</li>
+        <li>ADVANCED_README.md</li>
+        <li>Makefile</li>
+    </ul>
+
+    <h2>🚀 Execution & Replication</h2>
+    <p>Optimized for Apple Silicon ARM64 architecture.</p>
+    <code>
+# Compile and run the 3D physics engine
 make clean && make
 ./mond_sim
-python3 visualize_mond.py</code></pre>
 
-        <p style="text-align: center; margin-top: 80px; font-size: 16px; opacity: 0.5;">Developed by Dylan Tague | 2026</p>
-    </div>
+# Generate high-resolution visual analysis
+python3 visualize_mond.py
+    </code>
+
+    <footer style="margin-top: 100px; text-align: center; opacity: 0.6; font-size: 16px;">
+        Designed by Dylan Tague | &copy; 2026 Physics Research Suite
+    </footer>
+</div>
+
 </body>
 </html>
