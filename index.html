@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOND Physics | Full Simulation Archive</title>
+    <title>MOND Interactive Research Portal</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
@@ -12,70 +12,85 @@
         .container { max-width: 1200px; margin: 0 auto; }
         header { text-align: center; border-bottom: 1px solid var(--border); padding-bottom: 30px; margin-bottom: 40px; }
         h1 { color: var(--blue); font-size: 2.5rem; }
-        h2 { color: var(--blue); border-left: 5px solid var(--blue); padding-left: 15px; margin-top: 50px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 30px; }
-        .card { background: var(--card); padding: 25px; border-radius: 12px; border: 1px solid var(--border); }
+        
+        /* Grid and Interactive Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .card { background: var(--card); padding: 20px; border-radius: 12px; border: 1px solid var(--border); transition: transform 0.2s; cursor: pointer; }
+        .card:hover { transform: translateY(-5px); border-color: var(--blue); }
+        .card img { width: 100%; border-radius: 8px; background: #000; }
         .full-width { grid-column: 1 / -1; }
-        img { width: 100%; border-radius: 8px; margin-top: 15px; background: #000; border: 1px solid var(--border); }
-        .math-block { background: #090c10; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid var(--border); }
-        .desc { font-size: 0.95rem; margin-top: 15px; opacity: 0.9; }
+        
+        /* Modal / Lightbox Logic */
+        #modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; cursor: zoom-out; }
+        #modal img { max-width: 90% ; max-height: 90%; border: 2px solid var(--blue); border-radius: 10px; }
+        .close-hint { position: absolute; top: 20px; color: white; font-weight: bold; }
+
+        .desc { font-size: 0.9rem; margin-top: 15px; opacity: 0.8; }
+        .math-block { background: #090c10; padding: 25px; border-radius: 12px; margin: 40px 0; border: 1px solid var(--border); }
     </style>
 </head>
 <body>
+
+<div id="modal" onclick="this.style.display='none'">
+    <div class="close-hint">Click anywhere to close</div>
+    <img id="modal-img" src="">
+</div>
+
 <div class="container">
     <header>
-        <h1>🌌 MOND Physics Engine: Complete Portfolio</h1>
-        <p>3D N-Body Simulation Analysis & Kinetic Evolution</p>
+        <h1>🌌 MOND Interactive Dashboard</h1>
+        <p>Click any graph or animation to view in high resolution</p>
     </header>
 
-    <h2>🎬 Dynamic Animations</h2>
     <div class="grid">
-        <div class="card full-width">
-            <h3>3D Galactic Kinetic Evolution (2.0 Gyr)</h3>
-            <img src="galaxy_3d.gif" alt="3D Animation">
-            <p class="desc"><strong>Explanation:</strong> This animation demonstrates the stability of a galactic disk under Milgromian dynamics. Unlike Newtonian models which require a Dark Matter halo to prevent the disk from flying apart, the MOND potential provides additional binding force in the low-acceleration regime ($a < a_0$).</p>
+        <div class="card full-width" onclick="openModal('galaxy_3d.gif')">
+            <h2>🎬 3D Kinetic Evolution (2.0 Gyr)</h2>
+            <img src="galaxy_3d.gif" alt="3D Simulation">
+            <p class="desc"><strong>Interactive:</strong> Click to expand. Shows the stability of the Milgromian disk over 2 billion years of integration.</p>
         </div>
-    </div>
 
-    <h2>📊 Core Scientific Analysis</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>1. Rotation Curve Flattening</h3>
+        <div class="card" onclick="openModal('rotation_curves_analysis.png')">
+            <h3>📈 Rotation Curves</h3>
             <img src="rotation_curves_analysis.png" alt="Rotation Plot">
-            <p class="desc"><strong>Explanation:</strong> The rotation curve remains flat at large radii. In MOND, the circular velocity $V_c$ approaches a constant value $(GMa_0)^{1/4}$ as $r \to \infty$, successfully matching observed galaxy kinematics without unobserved mass.</p>
+            <p class="desc">Flat rotation curve verification: $(GMa_0)^{1/4}$ limit.</p>
         </div>
-        
 
-        <div class="card">
-            <h3>2. Tully-Fisher Relation (M-V Relation)</h3>
+        <div class="card" onclick="openModal('tully_fisher_relation.png')">
+            <h3>⚖️ Tully-Fisher Relation</h3>
             <img src="tully_fisher_relation.png" alt="Tully-Fisher Plot">
-            <p class="desc"><strong>Explanation:</strong> This plot confirms the tight correlation between total baryonic mass and the flat rotation velocity. This $M \propto V^4$ scaling is a fundamental prediction of MOND and is simulated here with high fidelity.</p>
+            <p class="desc">Baryonic Mass vs. Velocity scaling ($M \propto V^4$).</p>
         </div>
-        
-        
-        <div class="card">
-            <h3>3. Newtonian vs. Milgromian Divergence</h3>
+
+        <div class="card" onclick="openModal('mond_vs_newtonian.png')">
+            <h3>📉 Newtonian Divergence</h3>
             <img src="mond_vs_newtonian.png" alt="Comparison Plot">
-            <p class="desc"><strong>Explanation:</strong> This graph visualizes the transition point where standard gravity fails. Below the threshold of $a_0 \approx 1.2 \times 10^{-10} \text{ m/s}^2$, the effective gravitational field becomes significantly stronger than Newtonian predictions.</p>
+            <p class="desc">Visualizing the transition threshold at $a_0$.</p>
         </div>
-        
 
-        <div class="card">
-            <h3>4. Initial Conditions (T=0)</h3>
-            <img src="snapshot_000.png" alt="T0 Snapshot">
-            <p class="desc"><strong>Explanation:</strong> The initial setup of the Milky Way-like galaxy, showing the distribution of the 200 bulge particles and 800 disk particles before integration begins.</p>
+        <div class="card" onclick="openModal('snapshot_000.png')">
+            <h3>📸 Initial Conditions (t=0)</h3>
+            <img src="snapshot_000.png" alt="Initial Snapshot">
+            <p class="desc">Particle distribution of the bulge and stellar disk.</p>
         </div>
     </div>
 
-    <h2>📚 Mathematical Framework</h2>
     <div class="math-block">
-        \[ \mathbf{g}_{MOND} = \mathbf{g}_N \cdot \nu\left(\frac{|\mathbf{g}_N|}{a_0}\right) \]
-        <p>This engine utilizes a 2nd-order Symplectic Leapfrog integrator. By solving the QUMOND formulation of the Poisson equation, we account for the "External Field Effect" (EFE), a unique MOND prediction where the internal dynamics of a system are affected by the external gravitational environment.</p>
+        <h2>Mathematical Summary</h2>
+        \[ \mu\left(\frac{g}{a_0}\right)g = g_N \]
+        <p>Simulation utilizes a 2nd-order Symplectic Leapfrog integrator. Click the graphs above to inspect the results of the Milgromian potential integration.</p>
     </div>
 
-    <footer style="text-align: center; margin-top: 60px; padding: 40px; border-top: 1px solid var(--border); opacity: 0.6;">
-        Developed by Dylan Tague | 2026 | Simulation Architecture: C11 & Python 3
+    <footer style="text-align: center; margin-top: 50px; padding: 40px; border-top: 1px solid var(--border); opacity: 0.5;">
+        Developed by Dylan Tague | 2026
     </footer>
 </div>
+
+<script>
+    function openModal(src) {
+        document.getElementById('modal-img').src = src;
+        document.getElementById('modal').style.display = 'flex';
+    }
+</script>
+
 </body>
 </html>
