@@ -3,72 +3,77 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOND 3D Physics Engine</title>
+    <title>MOND 3D Physics Engine Dashboard</title>
     
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+      window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] } };
+    </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        :root { --bg: #0d1117; --text: #c9d1d9; --blue: #58a6ff; --code-bg: #161b22; }
         body { 
-            font-family: 'Inter', -apple-system, sans-serif;
-            line-height: 1.8;
-            margin: 0;
-            padding: 5% 10%; /* Big margins for a professional look */
-            background-color: var(--bg);
-            color: var(--text);
-            font-size: 24px; /* MASSIVE FONT SIZE */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117; color: #c9d1d9;
+            margin: 0; padding: 50px;
+            line-height: 1.6; font-size: 22px; /* Large base font */
         }
-        h1 { font-size: 3.5rem; color: var(--blue); margin-bottom: 0.5rem; }
-        h2 { font-size: 2.5rem; color: var(--blue); border-bottom: 2px solid #30363d; margin-top: 2rem; }
-        .container { max-width: 1400px; margin: 0 auto; }
-        pre { background: var(--code-bg); padding: 25px; border-radius: 15px; font-size: 20px; overflow-x: auto; border: 1px solid #30363d; }
-        img, video { width: 100%; height: auto; border-radius: 15px; border: 2px solid #30363d; margin: 20px 0; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { font-size: 3.5rem; color: #58a6ff; margin-bottom: 10px; text-align: center; }
+        h2 { font-size: 2.2rem; color: #58a6ff; border-bottom: 1px solid #30363d; margin-top: 50px; }
+        .hero-gif { width: 100%; border-radius: 20px; border: 2px solid #58a6ff; box-shadow: 0 0 30px rgba(88, 166, 255, 0.2); }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 40px 0; }
-        .math-card { background: var(--code-bg); padding: 40px; border-radius: 20px; border: 1px solid #30363d; margin: 30px 0; text-align: center; }
-        .footer { text-align: center; margin-top: 100px; font-size: 18px; opacity: 0.6; }
+        .card { background: #161b22; padding: 25px; border-radius: 15px; border: 1px solid #30363d; text-align: center; }
+        img { width: 100%; border-radius: 10px; margin-top: 15px; }
+        .math-box { background: #090c10; padding: 30px; border-radius: 15px; border-left: 5px solid #58a6ff; margin: 30px 0; font-size: 26px; }
+        pre { background: #000; padding: 20px; border-radius: 10px; color: #39ff14; overflow-x: auto; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🌌 MOND 3D Physics Engine</h1>
-        <p>A high-performance C11 simulator implementing Modified Newtonian Dynamics to solve the missing mass problem without Dark Matter.</p>
+        <p style="text-align:center; font-size: 26px; opacity: 0.8;">A Fully Symplectic N-Body Simulator for Milgromian Dynamics</p>
 
-        <h2>🎬 Live Evolution Animation</h2>
-        <p>Witness the formation of a Milgromian galactic disk over 2.0 Gyr:</p>
-        <img src="galaxy_evolution.gif" alt="Galaxy Evolution Animation">
+        <h2>🎬 Galaxy Evolution Animation</h2>
+        <img src="galaxy_evolution.gif" class="hero-gif" alt="Simulation Animation">
 
-        <h2>📊 Simulation Snapshots</h2>
+        <h2>📊 Key Scientific Results</h2>
         <div class="grid">
-            <div>
-                <p align="center"><strong>Initial State (T=0)</strong></p>
-                <img src="snapshot_000.png">
+            <div class="card">
+                <strong>MOND vs. Newtonian</strong>
+                <img src="mond_vs_newtonian.png">
+                <p style="font-size: 16px;">Comparison of gravitational drop-off.</p>
             </div>
-            <div>
-                <p align="center"><strong>Final State (T=2.0 Gyr)</strong></p>
-                <img src="snapshot_009.png">
+            <div class="card">
+                <strong>Tully-Fisher Relation</strong>
+                <img src="tully_fisher_relation.png">
+                <p style="font-size: 16px;">Empirical $M \propto V^4$ verification.</p>
             </div>
         </div>
 
-        <h2>➗ Core Physics (QUMOND)</h2>
-        <div class="math-card">
-            <p>Modified Gravitational Acceleration:</p>
+        <div class="card">
+            <strong>Full Rotation Curve Analysis</strong>
+            <img src="rotation_curves_analysis.png">
+        </div>
+
+        <h2>➗ The Physics of QUMOND</h2>
+        <div class="math-box">
             $$\mathbf{g} = \nu\left(\frac{|\mathbf{g}_N|}{a_0}\right) \mathbf{g}_N$$
+            <p style="font-size: 18px; margin-top: 10px;">The field equation relating Newtonian and Milgromian regimes.</p>
         </div>
 
-        
-
-        <div class="math-card">
-            <p>Simple Interpolation Function:</p>
+        <div class="math-box">
             $$\nu(y) = \frac{1}{2} + \sqrt{\frac{1}{4} + \frac{1}{y}}$$
+            <p style="font-size: 18px; margin-top: 10px;">The Simple Interpolation Function used in this engine.</p>
         </div>
 
-        <h2>🚀 Running the Engine</h2>
-        <pre><code>git clone https://github.com/DMDTague/mond-physics-engine.git
-cd mond-physics-engine
-make && ./mond_sim</code></pre>
+        <h2>🚀 Source Code & Reproducibility</h2>
+        <p>This engine is optimized for <strong>Apple Silicon (M1/M2/M3)</strong> using Clang.</p>
+        <pre><code># To reproduce these results:
+make clean && make
+./mond_sim
+python3 visualize_mond.py</code></pre>
 
-        <div class="footer">Created by Dylan Tague | 2026 Physics Suite</div>
+        <p style="text-align: center; margin-top: 80px; font-size: 16px; opacity: 0.5;">Developed by Dylan Tague | 2026</p>
     </div>
 </body>
 </html>
