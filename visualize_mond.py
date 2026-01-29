@@ -240,7 +240,7 @@ class MONDAnalyzer:
         
         plt.show()
     
-    def create_animation(self, output='galaxy_evolution.mp4'):
+    def create_animation(self, output='galaxy_evolution.gif'):
         """
         Create animation from all snapshot files
         """
