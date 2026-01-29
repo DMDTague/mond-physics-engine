@@ -3,38 +3,74 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOND Physics Engine | Deployment Fixed</title>
+    <title>MOND Physics Engine | Complete Portfolio</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root { --bg: #0d1117; --card: #161b22; --text: #c9d1d9; --blue: #58a6ff; --border: #30363d; }
-        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
-        .container { max-width: 1000px; margin: 0 auto; text-align: center; }
-        .hero { width: 100%; border-radius: 12px; border: 3px solid var(--blue); margin: 20px 0; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .card { background: var(--card); padding: 15px; border-radius: 10px; border: 1px solid var(--border); }
-        img { width: 100%; border-radius: 5px; background: #000; min-height: 200px; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header { text-align: center; padding: 40px 0; border-bottom: 1px solid var(--border); }
+        h1 { color: var(--blue); font-size: 2.8rem; margin-bottom: 10px; }
+        .hero-section { text-align: center; margin: 40px 0; }
+        .hero-gif { width: 100%; max-width: 900px; border-radius: 15px; border: 3px solid var(--blue); box-shadow: 0 0 30px rgba(88, 166, 255, 0.2); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card { background: var(--card); padding: 25px; border-radius: 12px; border: 1px solid var(--border); text-align: center; }
+        .card img { width: 100%; border-radius: 8px; margin-top: 15px; background: #000; }
+        .math-box { background: #090c10; padding: 30px; border-radius: 12px; border-left: 5px solid var(--blue); margin: 40px 0; }
+        h2, h3 { color: var(--blue); }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>🌌 MOND Physics Engine</h1>
-    <p>If images are missing, ensure 3D scripts were run locally first.</p>
+    <header>
+        <h1>🌌 MOND Physics Engine</h1>
+        <p>A Symplectic N-Body Simulation of Milgromian Dynamics</p>
+    </header>
 
-    <img src="galaxy_3d.gif?v=2" class="hero" alt="3D Animation Missing - Run visualize_3d.py">
+    <div class="hero-section">
+        <h2>🎬 3D Galaxy Evolution (2.0 Gyr)</h2>
+        <img src="galaxy_3d.gif?v=3" class="hero-gif" alt="3D Animation">
+        <p style="margin-top: 15px; opacity: 0.8;">Full kinematic evolution of 1,000 particles in a QUMOND potential.</p>
+    </div>
 
     <div class="grid">
         <div class="card">
-            <h3>📈 Rotation Curve</h3>
-            <img src="rotation_curves_analysis.png?v=2" alt="Plot Missing - Run visualize_mond.py">
+            <h3>📈 Rotation Curve Analysis</h3>
+            <img src="rotation_curves_analysis.png?v=3" alt="Rotation Curve">
+            <p>Verification of flat rotation curves in the deep-MOND regime.</p>
         </div>
+        
+
         <div class="card">
             <h3>⚖️ Tully-Fisher Relation</h3>
-            <img src="tully_fisher_relation.png?v=2" alt="Plot Missing - Run visualize_mond.py">
+            <img src="tully_fisher_relation.png?v=3" alt="Tully-Fisher">
+            <p>Confirmation of the mass-velocity scaling law: $M \propto V^4$.</p>
+        </div>
+        
+
+        <div class="card">
+            <h3>📉 MOND vs. Newtonian</h3>
+            <img src="mond_vs_newtonian.png?v=3" alt="Comparison Plot">
+            <p>Divergence of acceleration profiles at the $a_0$ threshold.</p>
+        </div>
+
+        <div class="card">
+            <h3>📸 Initial Snapshot (t=0)</h3>
+            <img src="snapshot_000.png?v=3" alt="T=0 Snapshot">
+            <p>Initial distribution of bulge and disk particles.</p>
         </div>
     </div>
 
-    <footer style="margin-top: 40px; opacity: 0.5;">Dylan Tague | 2026</footer>
+    <div class="math-box">
+        <h3>Mathematical Framework</h3>
+        \[ \mathbf{g} = \nu\left(\frac{|\mathbf{g}_N|}{a_0}\right) \mathbf{g}_N \]
+        <p>By solving the non-linear Poisson equation, this simulation accounts for the Internal and External Field Effects inherent to Milgromian gravity.</p>
+    </div>
+
+    <footer style="text-align: center; padding: 40px; opacity: 0.5; border-top: 1px solid var(--border);">
+        Developed by Dylan Tague | 2026 | Simulation Architecture: C11 / Python
+    </footer>
 </div>
 </body>
 </html>
