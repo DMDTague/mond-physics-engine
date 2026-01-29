@@ -2,62 +2,37 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import glob
-import os
 
-# 1. Setup the 3D Plot
-fig = plt.figure(figsize=(10, 10), facecolor='black')
-ax = fig.add_subplot(111, projection='3d', facecolor='black')
-
-# Hide the grid/axes for that "Space" look
-ax.set_axis_off()
-ax.grid(False)
-
-# 2. Load Data
-snapshot_files = sorted(glob.glob('snapshot_*.dat'), key=lambda x: int(x.split('_')[1].split('.')[0]))
-
+# Load data
+snapshot_files = sorted(glob.glob("snapshot_*.dat"))
 if not snapshot_files:
-    print("❌ No data found! You must run './mond_sim' and type 'y' first.")
+    print("❌ No snapshots found!")
     exit()
 
-print(f"🚀 Found {len(snapshot_files)} frames. Loading engine...")
-
-# 3. Animation Update Function
-scatter = ax.scatter([], [], [], s=2, c='cyan', alpha=0.6)
+fig = plt.figure(figsize=(10, 8), facecolor='black')
+ax = fig.add_subplot(111, projection='3d')
+ax.set_facecolor('black')
 
 def update(frame_idx):
-    # Clear previous frame data
     ax.clear()
+    ax.set_facecolor('black')
+    # Hide axes for a cinematic look
+    ax.grid(False)
     ax.set_axis_off()
     
-    # Set camera angle (rotate slowly)
-    ax.view_init(elev=30, azim=frame_idx * 2)
-    
-    # Set fixed limits so the universe doesn't jump around
-    limit = 30 # kpc
-    ax.set_xlim(-limit, limit)
-    ax.set_ylim(-limit, limit)
-    ax.set_zlim(-limit, limit)
-    
-    # Load data for this frame
     try:
         data = np.loadtxt(snapshot_files[frame_idx])
-        # Assuming columns are: x, y, z, vx, vy, vz, mass, type
-        x = data[:, 0]
-        y = data[:, 1]
-        z = data[:, 2]
-        
-        # Plot stars
-        ax.scatter(x, y, z, s=3, c='#00ffff', marker='o', alpha=0.8)
-        
-        # Add Title
-        ax.text2D(0.05, 0.95, f"MOND Physics Engine\nTime: {frame_idx*100} Myr", 
-                  transform=ax.transAxes, color='white', fontsize=14)
-        
+        # x, y, z are columns 0, 1, 2
+        ax.scatter(data[:, 0], data[:, 1], data[:, 2], s=1, c='#00ffff', alpha=0.7)
+        ax.set_title(f"MOND 3D Evolution: {frame_idx*100} Myr", color='white', fontsize=12)
+        # Set consistent limits so it doesn't "jump"
+        ax.set_xlim([-50, 50]); ax.set_ylim([-50, 50]); ax.set_zlim([-20, 20])
     except Exception as e:
-        print(f"Frame {frame_idx} error: {e}")
+        print(f"Error: {e}")
 
-# 4. Run Animation
-anim = FuncAnimation(fig, update, frames=len(snapshot_files), interval=50)
+anim = FuncAnimation(fig, update, frames=len(snapshot_files), interval=100)
 
-print("🎥 Rendering 3D Physics...")
-plt.show()
+print("🎥 Rendering 3D Animation to galaxy_3d.gif (this may take a minute)...")
+# We use 'pillow' because it doesn't require extra software like ffmpeg
+anim.save('galaxy_3d.gif', writer='pillow', fps=10)
+print("✅ Done! galaxy_3d.gif created.")
