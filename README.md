@@ -25,3 +25,25 @@ make
 ./mond_sim   # Enter 'y' for full simulation
 python3 visualize_mond.py
 \`\`\`
+
+## ➗ The Mathematics of MOND
+The engine calculates gravity by modifying the Newtonian acceleration ($g_N$) based on the fundamental MOND scale ($a_0 = 1.2 \times 10^{-10} \text{ m/s}^2$).
+
+### 1. The QUMOND Relation
+We use the **Quasi-Linear MOND (QUMOND)** formulation, which relates the MOND acceleration ($g$) to the Newtonian acceleration ($g_N$) through an interpolation function $\nu(y)$:
+
+$$ \mathbf{g} = \nu\left(\frac{|\mathbf{g}_N|}{a_0}\right) \mathbf{g}_N $$
+
+### 2. Interpolation Function
+The engine defaults to the **Simple** interpolation function, which is highly effective for galaxy-scale dynamics:
+
+$$ \nu(y) = \frac{1}{2} + \sqrt{\frac{1}{4} + \frac{1}{y}} $$
+
+Where $y = |\mathbf{g}_N| / a_0$. Note that:
+- When $g_N \gg a_0$, $\nu(y) \to 1$ (Newtonian Physics)
+- When $g_N \ll a_0$, $\nu(y) \to 1/\sqrt{y}$ (MOND Physics)
+
+### 3. Deep-MOND Limit
+At large distances from the galaxy center, the rotation velocity ($V_c$) becomes constant (flat), following:
+
+$$ V_c = \sqrt[4]{G M a_0} $$
