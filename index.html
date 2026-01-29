@@ -10,42 +10,46 @@
         :root { --bg: #0d1117; --card: #161b22; --text: #c9d1d9; --blue: #58a6ff; --border: #30363d; }
         body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.6; }
         .container { max-width: 1000px; margin: 0 auto; }
-        .hero { width: 100%; border-radius: 12px; border: 2px solid var(--blue); margin: 20px 0; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .card { background: var(--card); padding: 20px; border-radius: 10px; border: 1px solid var(--border); }
-        .download-btn { display: inline-block; padding: 10px 20px; background: #238636; color: white; text-decoration: none; border-radius: 6px; margin-top: 10px; }
-        img { width: 100%; border-radius: 5px; }
+        .hero { width: 100%; border-radius: 12px; border: 3px solid var(--blue); margin: 20px 0; box-shadow: 0 0 25px rgba(88, 166, 255, 0.3); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin-top: 30px; }
+        .card { background: var(--card); padding: 20px; border-radius: 12px; border: 1px solid var(--border); }
+        img { width: 100%; border-radius: 8px; margin-top: 10px; }
+        .math-block { background: #000; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid var(--blue); }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>🌌 MOND Physics Engine: 3D Galaxy Evolution</h1>
-    <p>Testing the Milgromian transition at $a_0 = 1.2 \times 10^{-10} \text{ m/s}^2$.</p>
+    <header style="text-align: center; margin-bottom: 40px;">
+        <h1 style="font-size: 3rem; color: var(--blue);">🌌 MOND 3D Evolution</h1>
+        <p style="font-size: 1.2rem; opacity: 0.8;">Gravitational Dynamics without Dark Matter</p>
+    </header>
 
-    <img src="galaxy_3d.gif" class="hero" alt="3D Evolution Animation">
-    <p style="text-align: center; font-style: italic; opacity: 0.7;">3D N-Body Simulation: 1,000 Particles over 2.0 Gyr (QUMOND Potential)</p>
+    <section>
+        <h2>🎬 Galactic Evolution (2.0 Gyr)</h2>
+        <p>This 3D N-Body simulation tracks 1,000 particles using a Leapfrog integrator within a QUMOND potential.</p>
+        <img src="galaxy_3d.gif" class="hero" alt="MOND 3D Simulation Animation">
+    </section>
 
     <div class="grid">
         <div class="card">
-            <h3>📊 Rotation Curve Analysis</h3>
-            <img src="rotation_curves_analysis.png" alt="Rotation Plot">
-            <p>Verification of velocity flattening in the deep-MOND regime.</p>
+            <h3>📈 Rotation Curve</h3>
+            <img src="rotation_curves_analysis.png" alt="Rotation Curve">
+            <p>Verification of velocity flattening: $V(r) \rightarrow \text{const}$ as $g \rightarrow a_0$.</p>
         </div>
         <div class="card">
-            <h3>⚖️ Tully-Fisher Relation</h3>
-            <img src="tully_fisher_relation.png" alt="TF Plot">
-            <p>Empirical proof: $M_{bar} \propto V_{flat}^4$.</p>
+            <h3>⚖️ Tully-Fisher Law</h3>
+            <img src="tully_fisher_relation.png" alt="Tully-Fisher Relation">
+            <p>Demonstrating the $M \propto V^4$ scaling inherent to MOND.</p>
         </div>
     </div>
 
-    <div class="card" style="margin-top: 30px;">
-        <h3>💾 Access Simulation Data</h3>
-        <p>Download the final 2.0 Gyr snapshot for independent verification:</p>
-        <a href="snapshot_009.dat" class="download-btn">Download snapshot_009.dat</a>
+    <div class="math-block">
+        <h3>The QUMOND Potential</h3>
+        \[ \nabla \cdot \mathbf{g} = \nabla \cdot \left[ \nu\left(\frac{|\nabla \Phi_N|}{a_0}\right) \nabla \Phi_N \right] \]
     </div>
 
-    <footer style="margin-top: 50px; text-align: center; border-top: 1px solid var(--border); padding: 20px;">
-        <p>Built by Dylan Tague | 2026 | Code: C11 & Python</p>
+    <footer style="margin-top: 60px; text-align: center; border-top: 1px solid var(--border); padding: 30px; opacity: 0.6;">
+        Developed by Dylan Tague | 2026 | Simulation Engine: C11
     </footer>
 </div>
 </body>
