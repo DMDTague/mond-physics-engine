@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOND 3D: Modified Newtonian Dynamics Physics Engine</title>
+    <title>MOND 3D Physics | Research Dashboard</title>
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -14,112 +14,83 @@
             --blue: #58a6ff; --green: #3fb950; --border: #30363d; --accent: #f0883e;
         }
         body { 
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg); color: var(--text);
             margin: 0; padding: 0; line-height: 1.6; font-size: 19px;
         }
-        .container { max-width: 1400px; margin: 0 auto; padding: 60px 20px; }
-        header { text-align: center; margin-bottom: 80px; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 50px 20px; }
+        header { text-align: center; margin-bottom: 60px; border-bottom: 1px solid var(--border); padding-bottom: 40px; }
         h1 { font-size: 3.5rem; color: var(--blue); margin: 0; }
-        h2 { font-size: 2.2rem; color: var(--blue); border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-top: 70px; }
+        h2 { font-size: 2.2rem; color: var(--blue); border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-top: 60px; }
         h3 { color: var(--accent); margin-top: 30px; font-size: 1.6rem; }
         
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-top: 30px; }
         .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 25px; }
         
         img { width: 100%; border-radius: 8px; margin-top: 15px; border: 1px solid var(--border); }
-        .hero-animation { width: 100%; border-radius: 15px; border: 2px solid var(--blue); box-shadow: 0 0 25px rgba(88, 166, 255, 0.2); }
+        .hero-animation { width: 100%; border-radius: 15px; border: 3px solid var(--blue); box-shadow: 0 0 30px rgba(88, 166, 255, 0.2); }
 
-        .math-block { background: #090c10; padding: 30px; border-radius: 12px; border-left: 6px solid var(--blue); margin: 30px 0; }
-        .code-block { background: #000; color: #d1d1d1; padding: 20px; border-radius: 10px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 15px; border: 1px solid var(--border); }
-        .keyword { color: #ff7b72; }
-        .comment { color: #8b949e; }
-        
-        .ref-list { font-size: 16px; opacity: 0.8; line-height: 1.4; }
-        .ref-list li { margin-bottom: 10px; }
+        .math-block { background: #090c10; padding: 30px; border-radius: 12px; border-left: 6px solid var(--blue); margin: 30px 0; font-size: 1.2rem; }
+        .code-block { background: #000; color: #d1d1d1; padding: 20px; border-radius: 10px; overflow-x: auto; font-family: monospace; font-size: 15px; border: 1px solid var(--border); }
+        .ref-list { font-size: 16px; opacity: 0.8; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>🌌 MOND 3D Physics Engine</h1>
-        <p style="font-size: 1.5rem; opacity: 0.8;">A High-Fidelity N-Body Framework for Milgromian Dynamics</p>
+        <h1>🌌 MOND 3D Research Dashboard</h1>
+        <p style="font-size: 1.4rem; opacity: 0.8;">Simulating Gravitational Dynamics without Dark Matter</p>
     </header>
 
-    <h2>🎬 Dynamical Evolution Results</h2>
+    <h2>🎬 3D Kinetic Evolution</h2>
+    <p>Visualizing 2.0 Gyr of evolution using a QUMOND potential. Note the maintenance of the stellar disk without a supporting dark matter halo.</p>
+    <img src="galaxy_3d.gif" class="hero-animation" alt="3D Galaxy Evolution">
+
     <div class="grid">
-        <div style="grid-column: span 2;">
-            <p><strong>Galaxy Evolution (2.0 Gyr):</strong> This animation shows the emergence of spiral structure and a stable stellar bar in a MOND potential without a Dark Matter halo.</p>
-            <img src="galaxy_evolution.gif" class="hero-animation">
-        </div>
         <div class="card">
             <h3>Tully-Fisher Scaling</h3>
             <img src="tully_fisher_relation.png">
-            <p>Matches $V_c^4 \propto M$ scaling.</p>
+            <p>Confirmation of the empirical scaling law: $V_c^4 \propto M$.</p>
         </div>
         <div class="card">
-            <h3>Newtonian Comparison</h3>
+            <h3>Newtonian Divergence</h3>
             <img src="mond_vs_newtonian.png">
-            <p>Divergence at $g < a_0$.</p>
+            <p>Visualizing the transition at $a_0 \approx 1.2 \times 10^{-10} \text{ m/s}^2$.</p>
         </div>
     </div>
 
-    <h2>➗ Theoretical Foundations</h2>
-    <p>MOND (Modified Newtonian Dynamics) proposes that the law of gravity changes at accelerations below a fundamental constant $a_0 \approx 1.2 \times 10^{-10} \text{ m/s}^2$.</p>
+    <h2>🚀 Advanced Theory & Implementation</h2>
     
-    <div class="math-block">
-        <h3>The Quasi-Linear MOND (QUMOND) Relation</h3>
-        \[\mathbf{g} = \nu\left(\frac{|\mathbf{g}_N|}{a_0}\right) \mathbf{g}_N\]
-        <p>This formulation provides a computationally efficient path to solve the non-linear Poisson equation [Milgrom, 2010].</p>
+    <div class="card">
+        <h3>1. The "Neutrino Patch" for Clusters</h3>
+        <p>Addresses the residual mass problem in galaxy clusters by integrating sterile neutrinos.</p>
+        <div class="code-block">
+            if (particle.type == TYPE_NEUTRINO) {
+                // High thermal velocity (1000 km/s) ensures neutrinos pool 
+                // in clusters but stay diffuse on galactic scales.
+                particle.vel = random_thermal_velocity(TEMP_NEUTRINO);
+            }
+        </div>
     </div>
 
-    <div class="math-block">
-        <h3>Interpolation Function (\(\nu\))</h3>
-        \[\nu(y) = \frac{1}{2} + \sqrt{\frac{1}{4} + \frac{1}{y}}\]
-        <p>Where \( y = |\mathbf{g}_N| / a_0 \). In the high-acceleration limit (\(y \gg 1\)), \(\nu \to 1\) (Newtonian). In the deep-MOND limit (\(y \ll 1\)), \(\nu \to 1/\sqrt{y}\).</p>
+    <div class="card" style="grid-column: span 1;">
+        <h3>2. QUMOND Force Relation</h3>
+        <div class="math-block">
+            $$\mathbf{g} = \nu\left(\frac{|\mathbf{g}_N|}{a_0}\right) \mathbf{g}_N$$
+        </div>
+        <p>Implemented via a 2nd-order Symplectic Leapfrog integrator for energy conservation.</p>
     </div>
 
-    <h2>🚀 Advanced Implementation Modules</h2>
-    <p>To address observational challenges like the <strong>Bullet Cluster</strong> and <strong>Hubble Tension</strong>, the engine implements several advanced physical modules.</p>
-
-    <h3>1. Galaxy Cluster Dynamics (The Neutrino Patch)</h3>
-    <p>MOND under-predicts gravity in clusters by a factor of ~2 [Banik & Zhao, 2022]. We implement <strong>sterile neutrinos</strong> as a "Hot Dark Matter" component that pools in clusters but stays diffuse in galaxies.</p>
-    <div class="code-block">
-<span class="keyword">typedef enum</span> { TYPE_BARYON, TYPE_NEUTRINO } ParticleType;
-<span class="comment">// Neutrinos are initialized with high thermal velocity (e.g., 1000 km/s)</span>
-<span class="comment">// This prevents them from collapsing on small scales but fixes the Cluster potential.</span>
-<span class="keyword">if</span> (p[i].type == TYPE_NEUTRINO) {
-    p[i].vel = random_thermal_velocity(TEMPERATURE_NEUTRINO);
-}
-    </div>
-
-    <h3>2. The Bullet Cluster (SPH Hydrodynamics)</h3>
-    <p>Simulating the separation of gas from gravitational peaks requires Smoothed Particle Hydrodynamics (SPH). Gas particles experience pressure; collisionless MOND particles do not.</p>
-    <div class="code-block">
-<span class="comment">// Apply repulsive pressure force between gas particles</span>
-<span class="keyword">if</span> (dist < h_smoothing) {
-    Vector3 pressure_force = calculate_pressure(particles[i], particles[j]);
-    apply_force(&particles[i], pressure_force);
-}
-    </div>
-
-    <h3>3. Comoving Cosmology (Expansion Drag)</h3>
-    <p>To model large-scale structures and the KBC Void, we implement the comoving formulation of MOND with Hubble Drag.</p>
-    <div class="math-block">
-        \[\frac{d^2\mathbf{x}}{dt^2} + 2H(t)\frac{d\mathbf{x}}{dt} = -\frac{1}{a^3}\nabla\Phi_{MOND}\]
-    </div>
-
-    <h2>📚 References & Scientific Origin</h2>
+    <h2>📚 Scientific References</h2>
     <ul class="ref-list">
-        <li><strong>[17] Milgrom, M. (1983):</strong> A modification of the Newtonian dynamics as a substitution for the invisible mass hypothesis. <em>Astrophysical Journal.</em></li>
-        <li><strong>[22] Banik, I., & Zhao, H. (2022):</strong> From Galactic Bars to the Hubble Tension: A comprehensive review of MOND. <em>Symmetry.</em></li>
-        <li><strong>Clowe, D., et al. (2006):</strong> A direct empirical proof of the existence of dark matter (The Bullet Cluster). <em>Astrophysical Journal Letters.</em></li>
-        <li><strong>Angus, G. W. (2009):</strong> Steriles neutrinos in galaxy clusters and the MONDian cosmological model. <em>MNRAS.</em></li>
+        <li><strong>Milgrom, M. (1983):</strong> A modification of the Newtonian dynamics. <em>ApJ.</em></li>
+        <li><strong>Banik, I., & Zhao, H. (2022):</strong> From Galactic Bars to the Hubble Tension. <em>Symmetry.</em></li>
+        <li><strong>Clowe, D. (2006):</strong> A direct empirical proof of the existence of dark matter (Bullet Cluster). <em>ApJL.</em></li>
     </ul>
 
-    <footer style="margin-top: 100px; text-align: center; border-top: 1px solid var(--border); padding: 40px;">
-        <p>Developed by Dylan Tague | 2026 | Simulation Code: C11 & Python 3</p>
+    <footer style="margin-top: 80px; text-align: center; border-top: 1px solid var(--border); padding: 40px; opacity: 0.6;">
+        Developed by Dylan Tague | 2026 | Simulation Engine: C11 / GCC -O3
     </footer>
 </div>
 
