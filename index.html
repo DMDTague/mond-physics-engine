@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOND 3D Physics Engine | Scientific Dashboard</title>
+    <title>MOND 3D Physics Engine | Research Dashboard</title>
     
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -18,121 +18,141 @@
             background-color: var(--bg); color: var(--text);
             margin: 0; padding: 0; line-height: 1.6; font-size: 20px;
         }
-        .container { max-width: 1400px; margin: 0 auto; padding: 60px 20px; }
+        .container { max-width: 1500px; margin: 0 auto; padding: 40px 20px; }
+        header { text-align: center; margin-bottom: 60px; border-bottom: 1px solid var(--border); padding-bottom: 40px; }
+        h1 { font-size: 3.8rem; color: var(--blue); margin: 0; letter-spacing: -1px; }
+        .subtitle { font-size: 1.4rem; opacity: 0.7; }
+
+        h2 { font-size: 2.4rem; color: var(--blue); margin-top: 50px; display: flex; align-items: center; gap: 15px; }
         
-        /* Header & Intro */
-        header { text-align: center; margin-bottom: 80px; }
-        h1 { font-size: 4rem; color: var(--blue); margin: 0; }
-        .subtitle { font-size: 1.5rem; opacity: 0.8; margin-top: 10px; }
-
-        /* Sections */
-        h2 { font-size: 2.5rem; color: var(--blue); border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-top: 60px; }
+        /* High-End Grid Layout */
+        .main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+        .side-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .visual-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 25px; margin: 25px 0; }
         
-        /* Layout Grids */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; margin-top: 30px; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 25px; transition: transform 0.2s; }
-        .card:hover { border-color: var(--blue); }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 30px; position: relative; }
+        .card h3 { margin-top: 0; color: var(--blue); border-bottom: 1px solid var(--border); padding-bottom: 10px; }
         
-        /* Media Elements */
-        img { width: 100%; border-radius: 8px; margin-top: 15px; border: 1px solid var(--border); }
-        .hero-animation { width: 100%; border-radius: 15px; border: 2px solid var(--blue); box-shadow: 0 0 20px rgba(88, 166, 255, 0.2); }
+        /* Media */
+        img, .hero-gif { width: 100%; border-radius: 12px; border: 1px solid var(--border); margin: 15px 0; }
+        .hero-gif { border: 3px solid var(--blue); box-shadow: 0 0 30px rgba(88, 166, 255, 0.15); }
 
-        /* Physics Blocks */
-        .math-block { background: #090c10; padding: 30px; border-radius: 12px; border-left: 6px solid var(--blue); margin: 30px 0; }
-        .math-text { font-size: 1.8rem; text-align: center; }
+        /* Physics Elements */
+        .formula-box { background: #090c10; padding: 25px; border-radius: 12px; border-left: 6px solid var(--blue); margin: 20px 0; font-size: 1.6rem; text-align: center; }
+        
+        /* File Structure columns */
+        .file-columns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; font-family: monospace; font-size: 16px; color: var(--green); }
+        .file-item { background: rgba(63, 185, 80, 0.05); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(63, 185, 80, 0.2); }
 
-        /* File Architecture List */
-        ul.file-list { columns: 2; list-style-type: none; padding: 0; }
-        ul.file-list li { padding: 8px 0; font-family: "SFMono-Regular", Consolas, monospace; font-size: 18px; }
-        ul.file-list li::before { content: "📄 "; }
-
-        code { background: #000; color: var(--green); padding: 20px; display: block; border-radius: 10px; overflow-x: auto; font-size: 18px; }
+        code { background: #000; color: #ff7b72; padding: 20px; display: block; border-radius: 10px; font-size: 18px; border: 1px solid var(--border); }
+        .tag { background: var(--blue); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; display: inline-block; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
+        <span class="tag">Active Research Project</span>
         <h1>🌌 MOND 3D Physics Engine</h1>
-        <p class="subtitle">A High-Performance N-Body Simulation Suite for Modified Newtonian Dynamics</p>
+        <p class="subtitle">Simulating Galactic Dynamics via the QUMOND Formulation (No Dark Matter Required)</p>
     </header>
 
-    <h2>🎬 Dynamical Evolution</h2>
-    <p>This 2.0 Gyr simulation captures the emergence of spiral structure and orbital stability using a symplectic leapfrog integrator.</p>
-    <img src="galaxy_evolution.gif" class="hero-animation" alt="Galaxy Evolution GIF">
-
-    <h2>📊 Core Scientific Results</h2>
-    <div class="grid">
+    <div class="main-grid">
         <div class="card">
-            <h3>Milgromian vs. Newtonian</h3>
-            <p>Analysis of the acceleration regimes ($g$ vs $g_N$).</p>
-            <img src="mond_vs_newtonian.png" alt="MOND vs Newtonian Comparison">
+            <span class="tag" style="background:var(--green)">Simulation Hero</span>
+            <h3>🎬 N-Body Galactic Evolution (2.0 Gyr)</h3>
+            <p>1,000-body simulation tracking disk stability over cosmic time. Note the emergence of spiral density waves and the maintenance of a stable stellar bar.</p>
+            <img src="galaxy_evolution.gif" class="hero-gif" alt="Evolution Animation">
+            
+            <div class="visual-grid">
+                <div>
+                    <p align="center"><strong>T = 0.0 Gyr (Initial)</strong></p>
+                    <img src="snapshot_000.png">
+                </div>
+                <div>
+                    <p align="center"><strong>T = 2.0 Gyr (Final)</strong></p>
+                    <img src="snapshot_009.png">
+                </div>
+            </div>
         </div>
+
+        <div class="side-grid">
+            <div class="card">
+                <h3>➗ QUMOND Physics</h3>
+                <p>Modified acceleration field equation:</p>
+                <div class="formula-box">
+                    \[\mathbf{g} = \nu\left(\frac{|\mathbf{g}_N|}{a_0}\right) \mathbf{g}_N\]
+                </div>
+                <p>Interpolation function ($\nu$):</p>
+                <div class="formula-box" style="font-size: 1.3rem;">
+                    \[\nu(y) = \frac{1}{2} + \sqrt{\frac{1}{4} + \frac{1}{y}}\]
+                </div>
+                <p><em>Where $a_0 = 1.2 \times 10^{-10} \text{ m/s}^2$</em></p>
+            </div>
+
+            <div class="card">
+                <h3>🚀 Engine Performance</h3>
+                <ul style="padding-left: 20px; font-size: 18px;">
+                    <li><strong>Architecture:</strong> Apple Silicon ARM64</li>
+                    <li><strong>Integrator:</strong> 2nd-Order Symplectic Leapfrog</li>
+                    <li><strong>Energy Conservation:</strong> DT=0.1 / Softening=1.0</li>
+                    <li><strong>Language:</strong> C11 / GCC -O3 Optimization</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h2>📊 Scientific Validation Suite</h2>
+    <div class="visual-grid">
         <div class="card">
             <h3>Tully-Fisher Relation</h3>
-            <p>Confirming the empirical $M \propto V^4$ scaling observed in nature.</p>
-            <img src="tully_fisher_relation.png" alt="Tully-Fisher Plot">
-        </div>
-    </div>
-
-    <div class="grid">
-        <div class="card">
-            <h3>Rotation Curve Analysis</h3>
-            <p>Verification of flat velocity profiles at large radii ($R > 10$ kpc).</p>
-            <img src="rotation_curves_analysis.png" alt="Rotation Curves">
+            <p>Scaling law between total mass and flat rotation velocity ($V_c^4 \propto M$).</p>
+            <img src="tully_fisher_relation.png">
         </div>
         <div class="card">
-            <h3>Disk Stability (Snapshots)</h3>
-            <div style="display:flex; gap: 10px;">
-                <img src="snapshot_000.png" style="width:50%" alt="Initial">
-                <img src="snapshot_009.png" style="width:50%" alt="Final">
-            </div>
-            <p style="text-align:center; font-size: 14px;">T = 0 Gyr vs T = 2.0 Gyr</p>
+            <h3>MOND vs. Newtonian</h3>
+            <p>Comparing acceleration regimes to identify the MONDian transition radius.</p>
+            <img src="mond_vs_newtonian.png">
+        </div>
+        <div class="card">
+            <h3>Rotation Curve Profile</h3>
+            <p>Confirmation of flat orbital velocities at high radii (Dark Matter substitute).</p>
+            <img src="rotation_curves_analysis.png">
         </div>
     </div>
 
-    <h2>➗ Theoretical Framework (LaTeX)</h2>
-    <div class="math-block">
-        <p>The Quasi-Linear MOND (QUMOND) field equation relates the MONDian acceleration $\mathbf{g}$ to the Newtonian acceleration $\mathbf{g}_N$:</p>
-        <div class="math-text">
-            \[\mathbf{g} = \nu\left(\frac{|\mathbf{g}_N|}{a_0}\right) \mathbf{g}_1\]
+    <h2>📂 Project Architecture & Data</h2>
+    <div class="card">
+        <p>The repository includes full raw simulation snapshots (.dat) and analysis scripts:</p>
+        <div class="file-columns">
+            <div class="file-item">mond_physics_engine.c</div>
+            <div class="file-item">mond_advanced.c</div>
+            <div class="file-item">visualize_mond.py</div>
+            <div class="file-item">visualize_advanced.py</div>
+            <div class="file-item">rotation_curve_final.dat</div>
+            <div class="file-item">rotation_curve_initial.dat</div>
+            <div class="file-item">snapshot_000.dat - 009.dat</div>
+            <div class="file-item">Makefile</div>
+            <div class="file-item">_config.yml</div>
         </div>
     </div>
 
-    <div class="math-block">
-        <p>The engine utilizes the **Simple Interpolation Function** to bridge the high-acceleration (Newtonian) and low-acceleration (Deep-MOND) regimes:</p>
-        <div class="math-text">
-            \[\nu(y) = \frac{1}{2} + \sqrt{\frac{1}{4} + \frac{1}{y}}\]
-        </div>
-        <p>where $y = |\mathbf{g}_N| / a_0$ and $a_0 \approx 1.2 \times 10^{-10} \text{ m/s}^2$.</p>
-    </div>
-
-    <h2>📂 Project Architecture</h2>
-    <p>This engine is comprised of the following modules and data files currently active in the repository:</p>
-    <ul class="file-list">
-        <li>mond_physics_engine.c</li>
-        <li>mond_sim (Executable)</li>
-        <li>visualize_mond.py</li>
-        <li>rotation_curve_final.dat</li>
-        <li>rotation_curve_initial.dat</li>
-        <li>snapshot_000.dat - snapshot_009.dat</li>
-        <li>ADVANCED_README.md</li>
-        <li>Makefile</li>
-    </ul>
-
-    <h2>🚀 Execution & Replication</h2>
-    <p>Optimized for Apple Silicon ARM64 architecture.</p>
-    <code>
-# Compile and run the 3D physics engine
+    <h2>💻 Replication Instructions</h2>
+    <div class="card" style="background:#000;">
+        <code>
+# 1. Build optimized binary
 make clean && make
+
+# 2. Execute 2.0 Gyr Simulation
 ./mond_sim
 
-# Generate high-resolution visual analysis
+# 3. Generate Analysis Visuals
 python3 visualize_mond.py
-    </code>
+        </code>
+    </div>
 
-    <footer style="margin-top: 100px; text-align: center; opacity: 0.6; font-size: 16px;">
-        Designed by Dylan Tague | &copy; 2026 Physics Research Suite
+    <footer style="margin-top: 80px; text-align: center; opacity: 0.5; font-size: 16px; border-top: 1px solid var(--border); padding-top: 40px;">
+        Designed by Dylan Tague | Generated via MacBook Air Physics Suite | 2026
     </footer>
 </div>
 
