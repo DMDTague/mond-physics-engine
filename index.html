@@ -3,59 +3,38 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOND Physics Engine | Full Results</title>
+    <title>MOND Physics Engine | Deployment Fixed</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root { --bg: #0d1117; --card: #161b22; --text: #c9d1d9; --blue: #58a6ff; --border: #30363d; }
-        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; line-height: 1.6; }
-        .container { max-width: 1100px; margin: 0 auto; }
-        .hero-section { text-align: center; margin-bottom: 40px; }
-        .hero-gif { width: 100%; max-width: 900px; border-radius: 12px; border: 3px solid var(--blue); box-shadow: 0 0 30px rgba(88, 166, 255, 0.2); }
-        .analysis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 25px; margin-top: 40px; }
-        .card { background: var(--card); padding: 20px; border-radius: 12px; border: 1px solid var(--border); text-align: center; }
-        .card img { width: 100%; border-radius: 8px; margin-top: 15px; }
-        h1, h2, h3 { color: var(--blue); }
-        .math-box { background: #000; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 5px solid var(--blue); font-size: 1.1rem; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; text-align: center; }
+        .hero { width: 100%; border-radius: 12px; border: 3px solid var(--blue); margin: 20px 0; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { background: var(--card); padding: 15px; border-radius: 10px; border: 1px solid var(--border); }
+        img { width: 100%; border-radius: 5px; background: #000; min-height: 200px; }
     </style>
 </head>
 <body>
 <div class="container">
-    <header class="hero-section">
-        <h1>🌌 MOND Physics Engine Dashboard</h1>
-        <p>Complete N-Body Simulation Results & Analysis</p>
-    </header>
+    <h1>🌌 MOND Physics Engine</h1>
+    <p>If images are missing, ensure 3D scripts were run locally first.</p>
 
-    <section class="hero-section">
-        <h2>🎬 3D Kinetic Evolution (2.0 Gyr)</h2>
-        <img src="galaxy_3d.gif" class="hero-gif" alt="3D Galaxy Evolution Animation">
-        <p style="margin-top: 10px; opacity: 0.8;">Evolution of 1,000 stellar particles in a Milgromian potential without Dark Matter.</p>
-    </section>
+    <img src="galaxy_3d.gif?v=2" class="hero" alt="3D Animation Missing - Run visualize_3d.py">
 
-    <div class="analysis-grid">
+    <div class="grid">
         <div class="card">
-            <h3>📈 Rotation Curve Analysis</h3>
-            <img src="rotation_curves_analysis.png" alt="Rotation Curve Results">
-            <p>Verification of flat rotation curves: $V(r)$ stays constant at large radii.</p>
+            <h3>📈 Rotation Curve</h3>
+            <img src="rotation_curves_analysis.png?v=2" alt="Plot Missing - Run visualize_mond.py">
         </div>
         <div class="card">
             <h3>⚖️ Tully-Fisher Relation</h3>
-            <img src="tully_fisher_relation.png" alt="Tully-Fisher Plot">
-            <p>The simulated correlation between baryonic mass and rotation velocity.</p>
+            <img src="tully_fisher_relation.png?v=2" alt="Plot Missing - Run visualize_mond.py">
         </div>
     </div>
 
-    <section style="margin-top: 50px;">
-        <h2>🔬 Mathematical Foundation</h2>
-        <div class="math-box">
-            \[ \mu\left(\frac{g}{a_0}\right)g = g_N \]
-            <p style="font-size: 0.9rem; margin-top: 10px;">Where $a_0 \approx 1.2 \times 10^{-10} \text{ m/s}^2$. As $g \ll a_0$, the dynamics become Milgromian, providing the necessary centripetal force without invisible mass.</p>
-        </div>
-    </section>
-
-    <footer style="margin-top: 80px; text-align: center; border-top: 1px solid var(--border); padding: 40px; opacity: 0.5;">
-        Simulation Architecture: C11 & Python 3 | Dylan Tague | 2026
-    </footer>
+    <footer style="margin-top: 40px; opacity: 0.5;">Dylan Tague | 2026</footer>
 </div>
 </body>
 </html>
